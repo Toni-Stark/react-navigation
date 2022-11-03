@@ -1,8 +1,7 @@
 import React from 'react';
-import { StyleSheet, TextInput, TouchableWithoutFeedback, View } from 'react-native';
+import { StyleSheet, Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import images from 'images';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export const HeaderBar = props => {
   return (
@@ -21,10 +20,11 @@ export const HeaderBar = props => {
             />
           </View>
         ) : (
-          <FastImage style={styles.logo} source={images.header} />
+          <Text style={styles.title}>数据面板</Text>
         )}
-
-        <View />
+        <View>
+          <FastImage style={styles.image} source={images.share} />
+        </View>
       </View>
     </>
   );
@@ -34,7 +34,9 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 10,
+    backgroundColor: '#00D1DE',
+    paddingVertical: 10,
+    paddingHorizontal: 15,
     position: 'relative',
     borderBottomWidth: 1,
     borderBottomColor: '#f2f2f2',
@@ -42,9 +44,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 60,
   },
+  title: {
+    fontSize: 17,
+    color: '#ffffff',
+  },
   image: {
-    width: 32,
-    height: 32,
+    width: 28,
+    height: 28,
     borderRadius: 60,
   },
   logo: {

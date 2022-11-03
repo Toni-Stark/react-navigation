@@ -8,19 +8,20 @@
  */
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
 // Screens
 import HelpScreen from '../HelpScreen';
 import Welcome from '../Welcome';
-import Ionicons from 'react-native-vector-icons/FontAwesome';
+import Icons from 'react-native-vector-icons/FontAwesome';
 import { StatusBar } from 'react-native';
 import { Home } from '../Home';
 import Toast from 'react-native-toast-message';
 import { User } from '../User';
 import { ShareView } from '../ModuleScreen/ShareView';
 import { Collection } from '../Collection';
+import { BlueTooth } from '../BlueTooth';
 
 const Tab = createMaterialBottomTabNavigator();
 const HomeStack = createStackNavigator();
@@ -35,30 +36,39 @@ const TabScreen = () => {
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size = 30 }) => {
           let iconName;
-          if (route.name === 'Home') {
-            iconName = focused ? 'forward' : 'forward';
-          } else if (route.name === 'User') {
-            iconName = focused ? 'heart' : 'add';
-          } else if (route.name === 'Collection') {
-            iconName = focused ? 'heart' : 'add';
+          let iconColor;
+          if (route.name === '数据面板') {
+            iconName = 'home';
+            iconColor = focused ? '#00D1DE' : '#f2f2f2';
+          } else if (route.name === '我的') {
+            iconName = 'user';
+            iconColor = focused ? '#00D1DE' : '#f2f2f2';
           }
-          return <Ionicons name={iconName} size={size} color={color} />;
+          return <Icons name={iconName} size={25} color={iconColor} />;
         },
       })}>
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Collection" component={Collection} />
-      <Tab.Screen name="User" component={User} />
+      <Tab.Screen name="数据面板" component={Home} />
+      <Tab.Screen name="我的" component={User} />
     </Tab.Navigator>
   );
 };
 
 const HomeScreen = () => {
   return (
-    <HomeStack.Navigator initialRouteName="TabScreen">
+    <HomeStack.Navigator
+      initialRouteName="TabScreen"
+      screenOptions={{
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+      }}>
       <HomeStack.Screen name="TabScreen" component={TabScreen} options={{ headerShown: false }} />
       <HomeStack.Screen name="Help" component={HelpScreen} />
       <HomeStack.Screen name="ShareView" component={ShareView} />
       <HomeStack.Screen name="Welcome" component={Welcome} />
+      <HomeStack.Screen
+        name="BlueTooth"
+        component={BlueTooth}
+        options={{ headerShown: false, navigationOptions: { header: null } }}
+      />
     </HomeStack.Navigator>
   );
 };
@@ -67,7 +77,7 @@ function App() {
   const ref = React.useRef(null);
   return (
     <NavigationContainer ref={ref}>
-      <StatusBar backgroundColor="#ffffff" barStyle={false ? 'light-content' : 'dark-content'} hidden={false} />
+      <StatusBar backgroundColor="#00D1DE" barStyle={true ? 'light-content' : 'dark-content'} hidden={false} />
       <HomeScreen />
       {/*<DrawerScreen />*/}
       <Toast />

@@ -9,6 +9,9 @@ const person = require('./tabBar/user.png');
 const personEval = require('./tabBar/user-eval.png');
 const home = require('./tabBar/home.png');
 const homeEval = require('./tabBar/home-eval.png');
+const share = require('./share.png');
+const devices = require('./devices.png');
+const right = require('./right.png');
 
 export default {
   logo,
@@ -22,4 +25,7 @@ export default {
   personEval,
   home,
   homeEval,
+  share,
+  devices,
+  right,
 };

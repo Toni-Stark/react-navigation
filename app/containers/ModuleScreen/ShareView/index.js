@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   Dimensions,
+  Image,
   KeyboardAvoidingView,
   SafeAreaView,
   Text,
@@ -37,13 +38,6 @@ export const ShareView = ({ route }) => {
 
   useEffect(() => {
     console.log(route.params.files);
-    // setShareFile(props.navigation.files);
-    // Navigation.mergeOptions(props.componentId, {
-    //   bottomTabs: {
-    //     visible: false,.
-    //   },
-    // });r
-    // console.log(props.files);
     setShareFile(route.params.files);
   }, [route.params.files]);
 
@@ -56,13 +50,15 @@ export const ShareView = ({ route }) => {
 
   const useSourceOrView = useMemo(() => {
     let source = shareFile?.length > current ? shareFile[current] : {};
+    console.log('log-----------', source);
     if (source?.fileName) {
+      console.log('file:///storage/emulated/0' + source.filePath);
       return (
         <View>
-          <FastImage
+          <Image
             style={styles.viewImage}
             source={{
-              uri: source.filePath,
+              uri: 'storage/emulated/0/' + source.filePath,
             }}
           />
         </View>

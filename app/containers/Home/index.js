@@ -5,6 +5,9 @@ import { styles } from './styles';
 import Toast from 'react-native-toast-message';
 import { HeaderBar } from '../../components/HeaderBar';
 import ReceiveSharingIntent from 'react-native-receive-sharing-intent';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
+import FastImage from 'react-native-fast-image';
+import images from 'images';
 
 export const Home = props => {
   const navigation = useNavigation();
@@ -12,9 +15,6 @@ export const Home = props => {
   useEffect(() => {
     ReceiveSharingIntent.getReceivedFiles(
       files => {
-        console.log('log-----------------');
-        // console.log(files);
-        console.log('log-----------------');
         navigation.navigate('ShareView', { files: files });
         //[{ filePath: null, text: null, weblink: null, mimeType: null, contentUri: null, fileName: null, extension: null }]
       },
@@ -44,14 +44,27 @@ export const Home = props => {
     // navigation.navigate('Help');
     navigation.navigate('ShareView', {});
   };
+
+  const linkBlueTooth = () => {
+    navigation.navigate('BlueTooth', {});
+  };
   return (
     <View style={styles.container}>
       <Toast onPress={toastPress} />
       <HeaderBar openLayout={() => updateMenuState(true)} />
       <View style={styles.root}>
-        <TouchableOpacity onPress={changeMenuState}>
-          <Text style={styles.font}>通过分享进入应用程序</Text>
-          <Text style={styles.font}>即可打开举报窗口 👋</Text>
+        <View style={styles.canvasStyle}></View>
+        <TouchableOpacity style={styles.linkOpacity} onPress={linkBlueTooth}>
+          <View style={styles.linkBlue}>
+            <View style={styles.tabView}>
+              <FastImage style={styles.image} source={images.devices} />
+              <Text style={styles.labelData}>设备未连接</Text>
+            </View>
+            <View style={styles.tabView}>
+              <Text style={styles.labelData}>点击连接设备</Text>
+              <FastImage style={styles.image} source={images.right} />
+            </View>
+          </View>
         </TouchableOpacity>
       </View>
     </View>
