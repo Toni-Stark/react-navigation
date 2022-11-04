@@ -12,6 +12,7 @@ const homeEval = require('./tabBar/home-eval.png');
 const share = require('./share.png');
 const devices = require('./devices.png');
 const right = require('./right.png');
+const back = require('./back.png');
 
 export default {
   logo,
@@ -28,4 +29,5 @@ export default {
   share,
   devices,
   right,
+  back,
 };
