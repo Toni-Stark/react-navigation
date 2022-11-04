@@ -4,7 +4,9 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  toothRoot: {},
+  toothRoot: {
+    flex: 1,
+  },
   toothItem: {
     width: '100%',
     flexDirection: 'row',
